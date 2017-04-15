@@ -11,6 +11,7 @@ ENDDB  = 'enddb.'
 ENDREC = 'endrec.'
 RECSEP = '=>'
 
+
 def storeDbase(db, dbfilename=dbfilename):
     "formatted dump of database to flat file"
     dbfile = open(dbfilename, 'w')
@@ -43,3 +44,5 @@ def loadDbase(dbfilename=dbfilename):
 if __name__ == '__main__':
     from initdata import db
     storeDbase(db)
+    for line in open("people-file"):
+        print(line, end='')
