@@ -43,6 +43,16 @@ def loadDbase(dbfilename=dbfilename):
 
 if __name__ == '__main__':
     from initdata import db
+    import sys,logging
+    #test function storeDbase()
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    logging.info("1、test function storeDbase")
     storeDbase(db)
+    #check the dbfile
     for line in open("people-file"):
         print(line, end='')
+    #test function loadDbase()
+    logging.info("2、test function loadDbase")
+    db = loadDbase()
+    for key in db:
+        print(key, '=>\n', db[key])
