@@ -1,3 +1,3 @@
 from tkinter import *
-Label(text='Spam').pack()
+Label(text=u'你好！').pack()
 mainloop()

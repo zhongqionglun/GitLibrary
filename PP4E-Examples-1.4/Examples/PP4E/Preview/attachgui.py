@@ -3,7 +3,7 @@ from tkinter102 import MyGui
 
 # main app window
 mainwin = Tk()
-Label(mainwin, text=__name__).pack()
+Label(mainwin, text=MyGui.__name__).pack()
 
 # popup window
 popup = Toplevel()
