@@ -6,3 +6,4 @@ for key in db:
 bob = db['bob']
 print(bob.lastName())
 print(db['tom'].lastName())
+db.close()

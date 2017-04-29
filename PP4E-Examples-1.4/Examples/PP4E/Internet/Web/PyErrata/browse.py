@@ -17,51 +17,56 @@ import cgi, urllib, sys, string
 sys.stderr = sys.stdout            # show errors in browser
 indexurl = 'index.cgi'             # minimal urls in links
 
+
 def generateRecord(record):
-    print '<p><table border>'
+    print('<p><table border>')
     rowhtml = '<tr><th align=right>%s:<td>%s\n'
     for field in record.keys():
         if record[field] != '' and field != 'Description':
-            print rowhtml % (field, cgi.escape(str(record[field])))
+            print(rowhtml % (field, cgi.escape(str(record[field]))))
 
-    print '</table></p>'
+    print('</table></p>')
     field = 'Description'
     text  = string.strip(record[field])
-    print '<p><b>%s</b><br><pre>%s</pre><hr>' % (field, cgi.escape(text))
+    print('<p><b>%s</b><br><pre>%s</pre><hr>' % (field, cgi.escape(text)))
+
 
 def generateSimpleList(dbase, sortkey):
     records = dbase().loadSortedTable(sortkey)           # make list
     for record in records:
         generateRecord(record)
 
+
 def generateIndexOnly(dbase, sortkey, kind):
     keys, index = dbase().loadIndexedTable(sortkey)      # make index links
-    print '<h2>Index</h2><ul>'                           # for load on click
+    print('<h2>Index</h2><ul>')                           # for load on click
     for key in keys:               
         html = '<li><a href="%s?kind=%s&sortkey=%s&value=%s">%s</a>' 
         htmlkey    = cgi.escape(str(key))
         urlkey     = urllib.quote_plus(str(key))         # html or url escapes
         urlsortkey = urllib.quote_plus(sortkey)          # change spaces to '+'
-        print html % (indexurl,
-                      kind, urlsortkey, (urlkey or '(none)'), (htmlkey or '?'))
-    print '</ul><hr>'
-       
+        print(html % (indexurl,
+                      kind, urlsortkey, (urlkey or '(none)'), (htmlkey or '?')))
+    print('</ul><hr>')
+
+
 def generateIndexed(dbase, sortkey):
     keys, index = dbase().loadIndexedTable(sortkey)
-    print '<h2>Index</h2><ul>'
+    print('<h2>Index</h2><ul>')
     section = 0                                          # make index
     for key in keys: 
         html = '<li><a href="#S%d">%s</a>' 
-        print html % (section, cgi.escape(str(key)) or '?')
+        print(html % (section, cgi.escape(str(key)) or '?'))
         section = section + 1
-    print '</ul><hr>'
+    print('</ul><hr>')
     section = 0                                          # make details
     for key in keys:
         html = '<h2><a name="#S%d">Key = "%s"</a></h2><hr>' 
-        print html % (section, cgi.escape(str(key)))
+        print(html % (section, cgi.escape(str(key))))
         for record in index[key]:
             generateRecord(record)
         section = section + 1
+
 
 def generatePage(dbase, kind='Errata'):
     form = cgi.FieldStorage()
@@ -70,9 +75,9 @@ def generatePage(dbase, kind='Errata'):
     except KeyError:
         sortkey = None
 
-    print 'Content-type: text/html\n'
-    print '<title>PP2E %s list</title>' % kind
-    print '<h1>%s list, sorted by "%s"</h1><hr>' % (kind, str(sortkey))
+    print('Content-type: text/html\n')
+    print('<title>PP2E %s list</title>' % kind)
+    print('<h1>%s list, sorted by "%s"</h1><hr>' % (kind, str(sortkey)))
 
     if not form.has_key('display'):
         generateSimpleList(dbase, sortkey)
