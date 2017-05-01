@@ -1,7 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from selenium import webdriver
 
-broswer = webdriver.Firefox()
-broswer.get("http://www.baidu.com")
-broswer.find_element_by_id("kw").send_keys("selenium")
-broswer.find_element_by_id("su").click()
-broswer.close()
+capabilities = webdriver.DesiredCapabilities().FIREFOX
+capabilities["marionette"] = False
+fbroswer = webdriver.Firefox()
+fbroswer.get("http://www.baidu.com")
+fbroswer.find_element_by_id("kw").send_keys("selenium")
+fbroswer.find_element_by_id("su").click()
+fbroswer.close()

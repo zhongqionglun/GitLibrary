@@ -10,19 +10,24 @@ import unittest, time, re
 
 class TestCase1Seleniumide(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome()
+        capabilities = webdriver.DesiredCapabilities().FIREFOX
+        capabilities["marionette"] = False
+        self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "https://www.baidu.com/"
+        self.base_url = "http://seleniumhq.org/"
         self.verificationErrors = []
         self.accept_next_alert = True
     
     def test_case1_seleniumide(self):
         driver = self.driver
         driver.get(self.base_url + "/")
+        driver.maximize_window()
+        time.sleep(2)
+        print(driver.title)
         driver.find_element_by_id("kw").clear()
         driver.find_element_by_id("kw").send_keys("selenium")
         driver.find_element_by_id("su").click()
-    
+
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException as e: return False
