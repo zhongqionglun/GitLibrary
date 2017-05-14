@@ -8,7 +8,8 @@ class MyGui(Frame):
         button = Button(self, text='press', command=self.reply)
         button.pack()
 
-    def reply(self):
+    @staticmethod
+    def reply():
         showinfo(title='popup', message='Button pressed!')
 
 if __name__ == '__main__':
