@@ -14,7 +14,7 @@ class TestCase1Seleniumide(unittest.TestCase):
         capabilities["marionette"] = False
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://seleniumhq.org/"
+        self.base_url = "https://www.baidu.com"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -24,6 +24,10 @@ class TestCase1Seleniumide(unittest.TestCase):
         driver.maximize_window()
         time.sleep(2)
         print(driver.title)
+        driver.find_element_by_name("tj_trnews").click()
+        time.sleep(2)
+        driver.back()
+        time.sleep(2)
         driver.find_element_by_id("kw").clear()
         driver.find_element_by_id("kw").send_keys("selenium")
         driver.find_element_by_id("su").click()
@@ -50,7 +54,7 @@ class TestCase1Seleniumide(unittest.TestCase):
         finally: self.accept_next_alert = True
     
     def tearDown(self):
-        self.driver.quit()
+        self.driver.close()
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
