@@ -2,7 +2,7 @@
 
 
 """
-
+def function to test with as statement
 """
 
 
