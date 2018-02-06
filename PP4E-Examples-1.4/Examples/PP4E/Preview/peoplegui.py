@@ -9,6 +9,7 @@ import shelve
 shelvename = 'class-shelve'
 fieldnames = ('name', 'age', 'job', 'pay')
 
+
 def makeWidgets():
     global entries
     window = Tk()
@@ -27,6 +28,7 @@ def makeWidgets():
     Button(window, text="Quit",   command=window.quit).pack(side=RIGHT)
     return window
 
+
 def fetchRecord():
     key = entries['key'].get()
     try:
@@ -37,6 +39,7 @@ def fetchRecord():
         for field in fieldnames:
             entries[field].delete(0, END)
             entries[field].insert(0, repr(getattr(record, field)))
+
 
 def updateRecord():
     key = entries['key'].get()
@@ -52,4 +55,4 @@ def updateRecord():
 db = shelve.open(shelvename)
 window = makeWidgets()
 window.mainloop()
-db.close() # back here after quit or window close
+db.close()  # back here after quit or window close

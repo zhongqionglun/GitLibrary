@@ -4,6 +4,8 @@
 ###############################################################################
 
 import sys
+from Tools.scripts.treesync import raw_input
+
 if raw_input('Are you sure?') not in ('y', 'Y', 'yes'):
     sys.exit()
 dbname = 'peopledb'                             # cleardb.py
@@ -13,4 +15,4 @@ from loaddb import login
 conn, curs = login(db=dbname)
 curs.execute('delete from people')
 conn.commit()                                   # else rows not really deleted
-print curs.rowcount, 'records deleted'          # conn closed by its __del__
+print(curs.rowcount, 'records deleted')         # conn closed by its __del__
