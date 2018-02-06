@@ -1,19 +1,22 @@
 # -*-coding:UTF-8-*-
 
-from openpyxl import Workbook, load_workbook, styles
-
+from openpyxl import Workbook, load_workbook, cell
 import datetime
 
 # Create workbook
+
+# Change background color
+from openpyxl.styles import PatternFill, Color
+
 wb = Workbook()
 # grab active worksheet
 ws = wb.active
 ws.sheet_properties.tabColor = "ff0000"
+ws['A1'].fill = PatternFill(patternType='solid', fill_type='solid', fgColor=Color('ff0000'))
 # Data can be assigned directly cells
 ws['A1'] = 10
 ws['B1'] = 20
 ws['C1'] = 30
-styles.Color()
 # Rows can also be
 for row in range(1, 40):
 	ws.append(range(600))
@@ -23,7 +26,7 @@ ws['A2'] = datetime.datetime.now()
 ws1 = wb.create_sheet()
 ws1.title = "secondsheet"
 ws1.cell(row=1, column=1, value="Passed")
-ws1.cell(row=2, column=1, value="Failed")
+d = ws1.cell(row=2, column=1, value="Failed")
 # for sheet in wb:
 # 	print(wb.sheetnames)
 wb.save("test.xlsx")
@@ -34,3 +37,4 @@ worksheet1 = Workbook1.sheetnames[0]
 print (worksheet1)
 sheet1 = Workbook1.get_sheet_by_name(worksheet1)
 print(sheet1.cell(row=1, column=2).value)
+wb.save("test.xlsx")
