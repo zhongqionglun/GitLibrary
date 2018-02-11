@@ -19,7 +19,7 @@ ws['B1'] = 20
 ws['C1'] = 30
 # Rows can also be
 for row in range(1, 40):
-	ws.append(range(600))
+    ws.append(range(600))
 # Python types will automatically be converted
 ws['A2'] = datetime.datetime.now()
 # save the file
@@ -34,7 +34,7 @@ wb.save("test.xlsx")
 Workbook1 = load_workbook('test.xlsx')
 print(Workbook1.sheetnames)
 worksheet1 = Workbook1.sheetnames[0]
-print (worksheet1)
+print(worksheet1)
 sheet1 = Workbook1.get_sheet_by_name(worksheet1)
 print(sheet1.cell(row=1, column=2).value)
 wb.save("test.xlsx")
