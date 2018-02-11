@@ -1,5 +1,9 @@
 # -*-coding:UTF-8-*-
 
+"""
+    装饰器-对类属性的访问-使用@property (用于属性读取)and @xxx.setter（用于属性设置）
+"""
+
 
 class Screen(object):
     @property

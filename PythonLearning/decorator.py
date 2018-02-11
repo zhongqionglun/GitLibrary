@@ -1,4 +1,9 @@
 # -*-coding:UTF-8-*-
+
+"""
+    装饰器-函数的装饰器，用于包装函数，使得调用前后能做根据包装器参数来打印不同的log信息
+    
+"""
 from functools import wraps
 import inspect, time
 
