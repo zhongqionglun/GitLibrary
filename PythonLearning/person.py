@@ -38,8 +38,7 @@ class Person(AttrDisplay):
 
 class Manager(Person):
     """
-, job='dev', pay=10000)
-    print(bob)	customized Person with special requirements
+    customized Person with special requirements
     """
 
     def __init__(self, name, pay):
