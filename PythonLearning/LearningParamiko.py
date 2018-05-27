@@ -38,7 +38,7 @@ def function2():
 
 
 if __name__ == '__main__':
-    hostname = "192.168.88.101"
+    hostname = "172.29.1.89"
     port = 22
     username = "root"
     password = "123456"
