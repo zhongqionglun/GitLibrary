@@ -2,7 +2,6 @@
 import pygame, sys
 from pygame.locals import *
 
-
 white = 255, 255, 255
 blue = 0, 0, 255
 pygame.init()
@@ -13,9 +12,7 @@ screen.fill(blue)
 screen.blit(textImage, (100, 100))
 pygame.display.update()
 while True:
-	for event in pygame.event.get():
-		if event.type in (QUIT, KEYDOWN):
-			sys.exit()
-	screen.fill(blue)
-	screen.blit(textImage, (100, 100))
-	pygame.display.update()
+    for event in pygame.event.get():
+        if event.type in (QUIT, KEYDOWN):
+            sys.exit()
+
