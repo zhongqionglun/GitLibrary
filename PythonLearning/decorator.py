@@ -13,7 +13,7 @@ def advance_logger(loglevel):
         return inspect.currentframe().f_back.f_back.f_lineno
 
     def _basic_log(fn, result, *args, **kwargs):
-        print("function   = " + fn.__name__, end=' ')
+        print("function   = " + fn.__name__, end='')
         print("    arguments = {0} {1}".format(args, kwargs))
         print("    return    = {0}".format(result))
 
