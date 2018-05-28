@@ -32,7 +32,7 @@ def function2():
     ssh.connect(hostname, port, username, private_key)  # 连接服务器,公钥已经加入到服务器的authorized_keys文件中
     ssh_session = ssh.get_transport().open_session()
     if ssh_session.active:
-        ssh_session.exec_command(execmd2)  # 执行命令
+        ssh_session.exec_command(execmd1)  # 执行命令
         print(ssh_session.recv(1024))  # 获取命令结果
     ssh.close()  # 关闭连接
 
@@ -42,7 +42,6 @@ if __name__ == '__main__':
     port = 22
     username = "root"
     password = "123456"
-    execmd1 = "free"
+    execmd1 = "./sipp/sipp -sn uac -i 192.168.88.101 -s 1000 192.168.88.9 -t -u -m 1"
     execmd2 = "df"
     function1()
-    function2()
