@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from win32com.client import Dispatch
-from importlib import reload
 import win32com.client
 import os
 
@@ -66,7 +65,7 @@ class easy_excel:
 
 class operate():
     def __init__(self, ExcelFileName, SheetName):
-        self.excelFile = ExcelFileName + '.xls'
+        self.excelFile = ExcelFileName + '.xlsx'
         self.excelSheet = SheetName
         self.temp = easy_excel(self.excelFile)
         self.dic_testlink = {}
@@ -98,10 +97,10 @@ class operate():
                 testcase["execution_type"] = 2
             actions = testcase["stepactions"].split('\n')
             results = testcase["expectedresults"].split('\n')
-            print(results)
-            step = {"step_number": "", "actions": "", "expectedresults": "", "execution_type": "1"}
+            # print(results)
             step_number = 1
             for actstring in actions:
+                step = {"step_number": "", "actions": "", "expectedresults": "", "execution_type": "1"}
                 step["step_number"] = step_number
                 print(step["step_number"])
                 step["actions"] = actstring[2:]
@@ -112,12 +111,13 @@ class operate():
                 else:
                     step["expectedresults"] = ""
                 testcase["steps"].append(step)
+                print(testcase["steps"])
                 step_number += 1
             self.row_flag += 1
             # print self.row_flag
             self.dic_testlink[self.testsuite]["testcase"].append(testcase)
             if self.temp.getCell(self.excelSheet, self.row_flag, 7) is None and self.temp.getCell(self.excelSheet, self.row_flag + 1, 7) is None:
-                print(self.dic_testlink)
+                # print(self.dic_testlink)
                 break
         self.temp.close()
         # print self.dic_testlink
@@ -178,4 +178,4 @@ if __name__ == "__main__":
         test.xlsx_to_dic(sheetName)
         test.dic_to_xml(fileName, sheetName)
     print("Convert success!")
-    os.system('pause')
+
