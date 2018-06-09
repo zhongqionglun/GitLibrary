@@ -25,16 +25,17 @@ ws['A2'] = datetime.datetime.now()
 # save the file
 ws1 = wb.create_sheet()
 ws1.title = "secondsheet"
-ws1.cell(row=1, column=1, value="Passed")
-d = ws1.cell(row=2, column=1, value="Failed")
+ws1.cell(row=1, column=1, value="成功")
+d = ws1.cell(row=2, column=1, value="失败")
 # for sheet in wb:
 # 	print(wb.sheetnames)
 wb.save("test.xlsx")
 
 Workbook1 = load_workbook('test.xlsx')
 print(Workbook1.sheetnames)
-worksheet1 = Workbook1.sheetnames[0]
-print(worksheet1)
-sheet1 = Workbook1.get_sheet_by_name(worksheet1)
-print(sheet1.cell(row=1, column=2).value)
+worksheet2 = Workbook1.sheetnames[1]
+print(worksheet2)
+sheet1 = Workbook1.get_sheet_by_name(worksheet2)
+print(sheet1.cell(row=1, column=1).value)
+print(sheet1.cell(row=2, column=1).value)
 wb.save("test.xlsx")
