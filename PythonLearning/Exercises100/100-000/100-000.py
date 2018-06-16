@@ -16,13 +16,13 @@ from PIL import Image, ImageFont, ImageDraw
 
 
 class DrawString(ImageDraw.ImageDraw):
-	
 	def drow_num(self, size):
 		numfont = ImageFont.truetype('C:\WINDOWS\Fonts\Arial.ttf', size=30)
 		fillcolor = "#ff0000"
 		width, height = size
 		self.text((width - 30, 5), '1', font=numfont, fill=fillcolor)
-	
+
+
 if __name__ == "__main__":
 	image = Image.open('0000.jpg')
 	drawnum = DrawString(image)
