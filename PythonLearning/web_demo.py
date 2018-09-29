@@ -12,29 +12,21 @@ def hello_world():
 @app.route('/post', methods=['POST'])
 def post():
     data = request.get_data()
-    f = open("received.txt", "a")
-    try:
-        f.write(data)
-        f.write("\r\n")
-    finally:
-        f.close()
-
+    with open("received.txt", "a") as f:
+        f.write(data + "\n")
     return "OK"
 
 @app.route('/get', methods=['GET'])
 def get():
     b = request.args.get('sim')
-    print b
+    print(b)
     return b
     
 @app.route('/show', methods=['GET'])
 def show():
     data = request.get_data()
-    f = open("received.txt", "r")
-    try:
-        data = f.read(-1)
-    finally:
-        f.close()
+    with open("received.txt", "r") as f:
+        data = f.read()
     return data
     
 if __name__ == "__main__":
