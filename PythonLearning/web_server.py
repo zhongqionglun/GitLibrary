@@ -14,6 +14,7 @@ import datetime
 
 app = Flask(__name__)
 
+
 def check_event(event):
     event_list = {
         "startup":"startup",
@@ -32,9 +33,11 @@ def check_event(event):
     else:
         return False
 
+
 @app.route('/')
 def index():
     return "<h1>Hello UC !</h1>"
+
 
 @app.route('/<event>')
 def Startup_event(event):
