@@ -30,11 +30,11 @@ class SshModule:
 
 
 if __name__ == '__main__':
-    hostname = "172.29.1.89"
+    hostname = "192.168.3.3"
     port = 22
     username = "root"
     password = "123456"
-    cmd = "sipp/sipp -sn uac -i 172.29.1.89 -s 18000 172.29.1.114:5060  -t -u -m 1 "
+    cmd = "sipp/sipp -i 192.168.3.3 -sf /root/sipp/uac.xml -inf /root/sipp/call.csv 192.168.3.2:5060  -t -u -m 1"
     paramiko.util.log_to_file('paramiko.log')
     sshconnect = SshModule(hostname, port, username, password)
     sshconnect.ssh_exec_command(cmd)
