@@ -5,7 +5,7 @@ def MyFilter(x): filter the prime :NOT odd NOT even   非奇非偶
 def MyCube(x): x*x*x
 def MyAdd(x): addition
 """
-
+from functools import  reduce
 
 def MyFilter(x): return x % 2 != 0 and x % 3 != 0
 
