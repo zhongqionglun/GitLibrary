@@ -17,6 +17,8 @@ def adb_hangup_caller():
 if __name__ == "__main__":
     print("The first python test script for Android!")
     print("Start caller...")
-    call_num = "18980988348"
+    call_num = "18683720168"
     adb_act_caller(call_num)
+    print("hang up...")
     adb_hangup_caller()
+
