@@ -49,7 +49,7 @@ if __name__ == "__main__":
         print("Can't retrieve the device info!")
     print("turnonscreen!")
     turnonscreen()
-    print("waite imcoming call...")
+    print("waite incoming call...")
     waite_accept_call()
     time.sleep(30) 
     print("turnonscreen!")
