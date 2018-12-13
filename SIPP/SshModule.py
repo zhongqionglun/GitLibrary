@@ -2,7 +2,6 @@
 
 
 import paramiko
-import io
 
 
 class SshModule:

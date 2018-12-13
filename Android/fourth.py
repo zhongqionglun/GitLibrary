@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+
+from uiautomator import device as d
+import os,time
+
+"""
+The fourth python test script for android
+"""
+
+# -*- coding: utf-8 -*-
 from uiautomator import device as d
 import os,time
 
@@ -24,7 +33,15 @@ def waite_accept_call():
                 time.sleep(1)
                 continue
 
+def play_music():
+    try:
+        d(text=u"音乐",className="android.widget.TextView").click()
+        time.sleep(5)
+        d(className="android.widget.ImageView", resourceId = "com.android.mediacenter:id/song_play").click()
+    except:
+        print("UiObject not found")
 
+    time.sleep(30)
 
 def devinfo():
     phone = d.info
@@ -42,19 +59,25 @@ def hangup():
     time.sleep(10)
 
 if __name__ == "__main__":
-    print("print device info!")
-    try:
-        print(devinfo())
-    except:
-        print("Can't retrieve the device info!")
+    # print("print device info!")
+    # try:
+    #     print(devinfo())
+    # except:
+    #     print("Can't retrieve the device info!")
+    # print("turnonscreen!")
+    # turnonscreen()
+    # print("waite imcoming call...")
+    # waite_accept_call()
+    # time.sleep(5)
     print("turnonscreen!")
     turnonscreen()
-    print("waite imcoming call...")
-    waite_accept_call()
-    time.sleep(30) 
+    if d(className="android.widget.ImageView", resourceId="com.android.systemui:id/mask_bottom").exists:
+        d.swipe(540,1792,540,1181)
+    print("play a music!")
+    play_music()
     print("turnonscreen!")
     turnonscreen()
-    print("hang up the call!")
-    hangup()
-    print("turnoffscreen!")
-    turnoffscreen()
+    # print("hang up the call!")
+    # hangup()
+    # print("turnoffscreen!")
+    # turnoffscreen()
