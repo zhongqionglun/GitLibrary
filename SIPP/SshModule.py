@@ -15,8 +15,10 @@ class SshModule:
 
     def ssh_exec_command(self, comm):
         stdin, stdout, stderr = self.ssh.exec_command(comm)
-        stdin.write("Y")
-        print(stdout.read())
+        #stdin.write("Y")
+        if stdout:
+            for std in stdout.readlines():
+                print(std)
         self.ssh.close()
 
     def upload_file_to_remote(self, localpathfile, remotepathfile):
@@ -33,7 +35,7 @@ if __name__ == '__main__':
     port = 22
     username = "root"
     password = "123456"
-    cmd = "sipp/sipp -i 192.168.3.3 -sf /root/sipp/uac.xml -inf /root/sipp/call.csv 192.168.3.2:5060  -t -u -m 1"
+    cmd = "sipp/sipp -i 192.168.3.3 -p 5060 -sf /root/sipp/uac.xml -inf /root/sipp/call.csv 192.168.3.5:5060  -t -u -m 1"
     paramiko.util.log_to_file('paramiko.log')
     sshconnect = SshModule(hostname, port, username, password)
     sshconnect.ssh_exec_command(cmd)
