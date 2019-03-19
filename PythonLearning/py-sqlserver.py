@@ -4,8 +4,8 @@ import pymssql
 
 try:
 	conn = pymssql.connect(host='.',database='master')
-except pymssql.OperationalError, msg:
-	print "error:Could not Connection SQL Server, Please check your dblink configure!"
+except pymssql.OperationalError:
+    print("error:Could not Connection SQL Server, Please check your dblink configure!")
 	sys.exit()
 else:
 	cur = conn.cursor()
