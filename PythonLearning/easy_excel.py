@@ -164,7 +164,7 @@ class operate():
 
     def write_to_file(self, ExcelFileName, SheetName):
         xmlFileName = ExcelFileName + '_' + SheetName + '.xml'
-        cp = open(xmlFileName, "w")
+        cp = open(xmlFileName, "w", encoding='UTF-8')
         cp.write(self.content)
         cp.close()
 
