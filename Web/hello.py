@@ -7,7 +7,7 @@
 功能：搭建一个简单的web服务器，用于测试flask web开发验证例子
 '''
 
-from flask import Flask, request, render_template, session, url_for, redirect
+from flask import Flask, request, render_template, session, url_for, redirect,flash
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
 from wtforms import StringField, SubmitField
@@ -31,10 +31,12 @@ class NameForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    name = None
     form = NameForm()
     # 页面submit提交后
     if form.validate_on_submit():
+        old_name = session.get('name')
+        if old_name is not None and old_name != form.name.data:
+            flash('The username is not same as last entered!')
         session['name'] = form.name.data
         return redirect(url_for('index'))
     return render_template('index.html', form=form, name=session.get('name'))
@@ -46,4 +48,4 @@ def user(name):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port='5000')
+    app.run(host='127.0.0.1', port='5000', debug=True)
