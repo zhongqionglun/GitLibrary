@@ -4,6 +4,8 @@ import multiprocessing
 
 
 class run_sn(object):
+	global a
+	a = 1
 
 	def Now_time(self):
 		s = datetime.datetime.now()
@@ -20,7 +22,7 @@ class run_sn(object):
 	def data1(self, x):
 		global a
 		a += 1
-		wa = {"msg": 1, "id": self.Time_id(a), "ver": "1.0", "sn": self.sn_test(x), "pid": 18, "pname": "DAG1000-8S ",
+		wa = {"status": "", "msg": 1, "id": self.Time_id(a), "ver": "1.0", "sn": self.sn_test(x), "pid": 18, "pname": "DAG1000-8S ",
 		      "productVersion": "02181003 2017-12-20 14:52:25 offical"}
 		j = json.dumps(wa)
 		return j
@@ -28,7 +30,7 @@ class run_sn(object):
 	def data2(self, x):
 		global a
 		a += 1
-		wa = {"msg": 1, "id": self.Time_id(a), "ver": "1.0", "sn": self.sn_test(x), "pid": 18, "pname": "DAG1000-8S ",
+		wa = {"status": "", "msg": 1, "id": self.Time_id(a), "ver": "1.0", "sn": self.sn_test(x), "pid": 18, "pname": "DAG1000-8S ",
 		      "productVersion": "02181003 2017-12-20 14:52:25 offical",
 		      "hash": "REEwMC0wMDQwLUM5MDAtMDIyMTo6bUI0aE5iaXJqRUhHVDVGSA=="}
 		j = json.dumps(wa)
@@ -37,14 +39,14 @@ class run_sn(object):
 	def data_it(self):
 		global a
 		a += 1
-		wa = {"msg": 0, "id": self.Time_id(a), "ver": "1.0", "time": self.Now_time()}
+		wa = {"status": "", "msg": 0, "id": self.Time_id(a), "ver": "1.0", "time": self.Now_time()}
 		j = json.dumps(wa)
 		return j
 
 	def run(self, x):
 		import socket
 		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		s.connect(('172.28.89.116', 3100))
+		s.connect(('172.28.53.20', 3100))
 		while True:
 			s.settimeout(60)
 			try:
@@ -54,17 +56,18 @@ class run_sn(object):
 				if not repr(answer):
 					continue
 				else:
-					print("Received answer of data1 %s" % answer + "=====received X num ..%d" % x)
+					print("Received answer of data1 %s \n" % answer + "=====received X num ..%d" % x)
 					break
 			except socket.timeout:
 				continue
 
 		time.sleep(0.5)
-		print("send data2.....%d" % x)
+		# print("send data2.....%d" % x)
 		s.send(self.data2(x).encode())
+		print("Received answer of data2 %s \n" % s.recv(128).decode('utf-8'))
 		while True:
+			print("Now thread %s  for % d send heartbeat message ......\n" % (threading.current_thread().name, x))
 			s.send(self.data_it().encode())
-			print('%s:  ' % self.sn_test(x) + "Received answer of data_it %s" % s.recv(128).decode('utf-8'))
 			time.sleep(10)
 
 
@@ -77,8 +80,8 @@ def run_test(x, n):
 
 def run_loop():
 	print("create process...")
-	p1 = multiprocessing.Process(target=run_test, args=(1, 1000),)
-	p2 = multiprocessing.Process(target=run_test, args=(1001, 2000), )
+	p1 = multiprocessing.Process(target=run_test, args=(1, 5),)
+	p2 = multiprocessing.Process(target=run_test, args=(5, 11), )
 
 	p1.start()
 	p2.start()
