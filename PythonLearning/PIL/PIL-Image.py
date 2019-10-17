@@ -28,7 +28,7 @@ grey = img.convert('L')
 grey.show()
 
 # 读取像素值
-print img.getpixel((25, 25))
+print(img.getpixel((25, 25)))
 
 # 改变像素值
 img.putpixel((25, 25), (0, 0, 0))
@@ -51,7 +51,8 @@ img.show()
 img.save('thumbnail-0000.JPG', 'JPEG')
 
 # 打印Image信息
-print img.format, img.mode, img.size
+print(img.format, img.mode, img.size)
+
 
 
 
